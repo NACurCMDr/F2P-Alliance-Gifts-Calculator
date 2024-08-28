@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Goal Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculatorForm {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #e0e0e0;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: #2b2b2b;
+            color: #ffffff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-top: 40px;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+
+        .error {
+            color: #FF4C4C;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="calculatorForm">
+        <h1>Gift Goal Calculator</h1>
+        <label for="giftGoal">Total Goal Gift Points:</label>
+        <input type="number" id="giftGoal" name="giftGoal" required>
+
+        <label for="giftsReceived">Current Gift Points:</label>
+        <input type="number" id="giftsReceived" name="giftsReceived" required>
+
+        <label for="allianceMembers">Alliance Members:</label>
+        <input type="number" id="allianceMembers" name="allianceMembers" required>
+
+        <button type="button" onclick="calculate()">Calculate</button>
+    </form>
+
+    <h2>Estimated number of remaining rallies: <span id="result">0</span></h2>
+    <div id="error" class="error"></div>
+
+    <script>
+        function calculate() {
+            const giftGoal = parseFloat(document.getElementById('giftGoal').value);
+            const giftsReceived = parseFloat(document.getElementById('giftsReceived').value);
+            const allianceMembers = parseFloat(document.getElementById('allianceMembers').value);
+            const errorDiv = document.getElementById('error');
+
+            // Clear previous errors
+            errorDiv.innerText = '';
+
+            if (isNaN(giftGoal) || isNaN(giftsReceived) || isNaN(allianceMembers) || allianceMembers === 0) {
+                errorDiv.innerText = 'Please enter valid numbers and ensure Alliance Members is not zero.';
+                return;
+            }
+
+            if (giftGoal <= giftsReceived) {
+                errorDiv.innerText = 'Error: Gift Goal must be higher than Gifts Received.';
+                return;
+            }
+
+            const result = Math.round((giftGoal - giftsReceived) / (allianceMembers * 10));
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
