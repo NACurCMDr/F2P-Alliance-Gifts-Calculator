@@ -15,6 +15,8 @@
             flex-direction: column;
             height: 100vh;
             margin: 0;
+            padding: 10px; /* Added padding for small screens */
+            box-sizing: border-box;
         }
 
         #calculatorForm {
@@ -29,6 +31,7 @@
         h1 {
             text-align: center;
             color: #ffffff;
+            font-size: 1.5em;
         }
 
         label {
@@ -37,7 +40,7 @@
         }
 
         input[type="number"] {
-            width: calc(100% - 22px);
+            width: 100%; /* Changed to 100% for better responsiveness */
             padding: 10px;
             margin: 8px 0 16px 0;
             border: 1px solid #444;
@@ -57,6 +60,7 @@
             border-radius: 5px;
             font-size: 1.1em;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
@@ -67,6 +71,7 @@
             text-align: center;
             color: #007BFF;
             margin-top: 40px;
+            font-size: 1.2em;
         }
 
         #result {
@@ -78,6 +83,30 @@
             font-weight: bold;
             text-align: center;
             margin-top: 20px;
+            font-size: 1em;
+        }
+
+        /* Media Queries for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.2em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1em;
+            }
+
+            .error {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
